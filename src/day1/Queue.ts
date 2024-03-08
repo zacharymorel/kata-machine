@@ -3,6 +3,8 @@ interface Node<T> {
     next?: Node<T>;
 }
 
+// *     A -> B -> C -> D
+// *    Head           Tail
 export default class Queue<T> {
     public length: number;
     private _head: Node<T> | undefined;
