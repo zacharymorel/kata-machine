@@ -9,8 +9,8 @@ function qs(arr: number[], lo: number, hi: number): void {
     if (lo >= hi) {
         return;
     }
+
     const pivotIndex = partition(arr, lo, hi);
-    // console.log("pivotIndex: ", pivotIndex);
 
     // pivot - 1 or pivot + 1 is always where we sort.
     // Sort everything on the left of the pivot
@@ -22,23 +22,23 @@ function qs(arr: number[], lo: number, hi: number): void {
 // Returns the pivot index
 function partition(arr: number[], lo: number, hi: number): number {
     const pivot = arr[hi];
-    let idx = lo - 1; // we go - 1 back from the lo because we need to be able to put stuff in the lo position.
+    let idx = lo - 1; // we go - 1 back from the lo because we need to be able to put stuff in the lo position. (partitionIndex)
 
+    // Looping over the portion of the array between the lo and hi indices
     for (let i = lo; i < hi; i++) {
-        // Moves everything over that is less than our pivot
+        // if value is less than pivot value, we move it over to the left of the pivot
         if (arr[i] <= pivot) {
             idx++;
             const temp = arr[i];
-            // console.log("temp: ", temp, " | pivot:: ", pivot);
             arr[i] = arr[idx];
             arr[idx] = temp;
-            // console.log("arr[i]: ", arr[i], " | arr[idx]: ", arr[idx]);
         }
     }
 
-    idx++;
-    arr[hi] = arr[idx];
-    arr[idx] = pivot;
+    idx++; // The lo idx is moved up 1 last time.
+    arr[hi] = arr[idx]; // swap current lo with hi
+    arr[idx] = pivot; // Current lo will be the pivots spot.
+    //WE ARE SORTING ALL PIVOTS until there is only 1 element left in each subset array.
 
     // Return the pivot index
     return idx;
