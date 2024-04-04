@@ -11,7 +11,7 @@ function qs(arr: number[], lo: number, hi: number): void {
     }
 
     const pivotIndex = partition(arr, lo, hi);
-
+    console.log("pivotIndex: ", pivotIndex);
     // pivot - 1 or pivot + 1 is always where we sort.
     // Sort everything on the left of the pivot
     qs(arr, lo, pivotIndex - 1);
