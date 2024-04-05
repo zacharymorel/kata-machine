@@ -1,17 +1,17 @@
 type Node<T> = {
     value: T;
-    prev?: Node<T> | null;
-    next?: Node<T> | null;
+    prev?: Node<T> | undefined;
+    next?: Node<T> | undefined;
 };
 
 export default class DoublyLinkedList<T> {
     public length: number;
-    private head?: Node<T> | null;
-    private tail?: Node<T> | null;
+    private head?: Node<T> | undefined;
+    private tail?: Node<T> | undefined;
 
     constructor() {
         this.length = 0;
-        this.head = null;
+        this.head = undefined;
     }
 
     prepend(item: T): void {
@@ -83,7 +83,7 @@ export default class DoublyLinkedList<T> {
             }
             curr = curr.next;
         }
-        if (!curr) return item;
+        if (!curr) return undefined;
         return this.removeNode(curr);
     }
 
@@ -103,15 +103,13 @@ export default class DoublyLinkedList<T> {
         this.length--;
         if (this.length === 0) {
             const out = this.head?.value;
-            this.head = null;
-            this.tail = null;
+            this.head = undefined;
+            this.tail = undefined;
             return out;
         }
 
-        // if (node.prev) node.prev.next = node.next;
-        if (node.prev) node.prev = node.next;
-        // if (node.next) node.next.prev = node.prev;
-        if (node.next) node.next = node.prev;
+        if (node.prev) node.prev.next = node.next;
+        if (node.next) node.next.prev = node.prev;
 
         if (node === this.head) {
             // Move up head
@@ -123,15 +121,15 @@ export default class DoublyLinkedList<T> {
         }
 
         // Broken nodeent from linkedlist
-        node.prev = null;
-        node.next = null;
+        node.prev = undefined;
+        node.next = undefined;
 
         return node.value;
     }
 
-    private getAt(idx: number): Node<T> | undefined | null {
+    private getAt(idx: number): Node<T> | undefined {
         let curr = this.head;
-        for (let i = 0; curr && i < this.length; ++i) {
+        for (let i = 0; curr && i < idx; ++i) {
             curr = curr.next;
         }
         return curr;
