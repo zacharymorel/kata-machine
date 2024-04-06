@@ -7,8 +7,8 @@ interface Node<T> {
 // *    Head           Tail
 export default class Queue<T> {
     public length: number;
-    private _head: Node<T> | undefined;
-    private _tail: Node<T> | undefined;
+    private _head: Node<T> | undefined | null;
+    private _tail: Node<T> | undefined | null;
 
     constructor() {
         this._head = undefined;
